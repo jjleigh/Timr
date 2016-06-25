@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import '../styles/timr';
-
-class Timr extends React {
+class Timr extends React.Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      minute: 0,
-      second: 0
+      paused: true,
+      minute: this.props.minute,
+      second: this.props.second
     }
+
   }
 
-  IncrementMinute() {
-    setInterval( this.setState({minute: this.state.minute + 1 }), 60000);
+  incrementMinute() {
+    if(this.state.second == 0) {
+      this.setState({minute: this.state.minute + 1 });
+    }   
   }
 
-  IncrementSecond() {
-    setInterval( this.setState({second: this.state.second + 1 }), 1000);
+  incrementSecond() {
+    if(this.state.second < 59 ) {
+      this.setState({second: this.state.second + 1 })
+    } else {
+      this.incrementMinute()
+      this.setState({second: 0 });
+    }
+
   }
+
+  changePauseState() {
+    if(this.state.paused == true) {
+      this.setState({ paused: false })
+    } else { 
+      this.setState({ paused: true })
+    }
+  } 
+
+
 
   AddNewTimr() {
 
@@ -29,17 +47,20 @@ class Timr extends React {
   render () {
     return (
       <div id="timr-container">
-        
-        <div className="min-container">
-          { this.state.minute }
+        <div className="inner">
+          <span className="min-container common">
+            { this.state.minute }
+          </span>
+          <span className="separator common"> : </span>
+          <span className="sec-container common">
+            { this.state.second }
+          </span>
         </div>
-        <div className="sec-container">
-          { this.state.second }
-        </div>
-
-        <div className="add-timr" onClick="">
-          +
-        </div>
+        <i  className={ `${ this.state.paused == false ? 'hidden-icon ': '' }fa fa-pause icons` } 
+            aria-hidden="true" 
+            onClick={ () => this.changePauseState() } >
+        </i>
+        <i className={ `${ this.state.paused == true ? 'hidden-icon ': '' }fa fa-play icons` } aria-hidden="true" onClick={ () => this.changePauseState() }></i>
       </div>
     )
   }

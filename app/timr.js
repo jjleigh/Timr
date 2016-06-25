@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Timr from './components/timr';
-
-import './styles/global';
+import Timr from './components/timr.jsx';
 
 ReactDOM.render(
-	<Timr />,
+	<Timr minute={ 0 } second={ 0 }/>,
 	document.getElementById('timr')
 );
