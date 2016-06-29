@@ -15,37 +15,6 @@ h2 {
 
 #timr-container {
   position: relative;
-  margin: 0 auto;
-  text-align: center;
-  border: 3px solid white;
-  border-radius: 50%;
-  width: 300px;
-  height: 300px;
-  display: table;
-}
-
-.inner {
-  display: table-cell;
-  vertical-align: middle;
-}
-.common {
-  font-size: 90px;
-  display: inline-block;
-  color: white;
-  font-family: Muli;
-}
-
-.hidden-icon {
-  visibility: hidden;
-}
-
-.icons {
-  cursor: pointer;
-  position: absolute;
-  color: white;
-  bottom: 50px;
-  left: 46%;
-  font-size: 25px !important;
 }
 
 

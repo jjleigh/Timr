@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Clock from './clock.jsx'
+import ProgressBar from './progress_bar.jsx'
 
 class Timr extends React.Component {
 
@@ -42,30 +44,14 @@ class Timr extends React.Component {
     }
   } 
 
-  AddNewTimr() {
-
-  }
-
   render () {
     return (
-      <div id="timr-container">
-        <div className="inner">
-          <span className="min-container common">
-            { this.state.minute }
-          </span>
-          <span className="separator common"> : </span>
-          <span className="sec-container common">
-            { this.state.second.toString().length == 1 ? "0" + this.state.second : this.state.second }
-          </span>
-        </div>
-        <i  className={ `${ this.state.paused == true ? 'hidden-icon ': '' }fa fa-pause icons` } 
-            aria-hidden="true" 
-            onClick={ () => this.changePauseState() } >
-        </i>
-        <i  className={ `${ this.state.paused == false ? 'hidden-icon ': '' }fa fa-play icons` } 
-            aria-hidden="true" 
-            onClick={ () => this.changePauseState() }>
-        </i>
+      <div id="timr-container">      
+        <ProgressBar />
+        <Clock second={ this.state.second } 
+               minute={ this.state.minute } 
+               paused={ this.state.paused } 
+               callback={ () => this.changePauseState() }/>
       </div>
     )
   }
