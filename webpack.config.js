@@ -24,10 +24,14 @@ const COMMON = {
 		}, {
 			test: /\.css$/,
 			loaders: ['style', 'css', 'postcss']
-		}]
+		}, {
+
+        	test: /\.less$/,
+        	loader: "style!css!less"
+      	}]
 	},
 	resolve: {
-		extensions: ["", ".css", ".js", ".jsx"],
+		extensions: ["", ".css", ".js", ".jsx", ".less"],
 		"root": __dirname
 	},
 	postcss: (webpack) => {
