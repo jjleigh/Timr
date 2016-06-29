@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 
 class Clock extends React.Component {
 
-  stringify(num) {
-    return num.toString
-  }
   render() {
     return(
       <div className="clock-outer-container">
