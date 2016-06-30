@@ -1,12 +1,61 @@
-
 .progress-bar {
-    /*background-color: tomato;*/
-    background-color: #C0CA78;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 50%;
-    width: 325px;
-    height: 325px;
-    position: relative
+  @circle-background: #EEE;
+  @circle-size: 325px;
+  @circle-color: #C0CA78;
+  @transition-length: 200ms;
+
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 50%;
+  width:  @circle-size;
+  height: @circle-size;
+  position: relative;
+  background-color: @circle-background;
+
+  .progress-circle {
+    .progress-cover, .progress-fill-layer {
+      width: @circle-size;
+      height: @circle-size;
+      position: absolute;
+      border-radius: 50%;
+    }
+  
+    .progress-cover, .progress-fill-layer {
+      -webkit-backface-visibility: hidden;
+      transition: -webkit-transform @transition-length;
+      transition: -ms-transform @transition-length;
+      transition: transform @transition-length;
+      border-radius: 50%;
+    }
+    .progress-cover {
+      clip: rect(0px, @circle-size, @circle-size, @circle-size / 2);
+      .progress-fill-layer {
+        clip: rect(0px, @circle-size / 2, @circle-size, 0px);
+        background-color: @circle-color;
+      }
+    }
+  }
+  
+  @i: 0;
+  @increment: 180deg / 60;
+  .loop (@i) when (@i <= 60) {
+    &[data-progress="@{i}"] {
+      .progress-circle {
+        .progress-cover.cover, .progress-fill-layer {
+          -webkit-transform: rotate(@increment * @i);
+          -ms-transform: rotate(@increment * @i);
+          transform: rotate(@increment * @i);
+        } 
+        .progress-fill-layer.progress-fix {
+          -webkit-transform: rotate(@increment * @i * 2);
+          -ms-transform: rotate(@increment * @i * 2);
+          transform: rotate(@increment * @i * 2);
+        }
+      }
+    } 
+    .loop(@i + 1);
+  }
+  .loop(@i);
 }
+
 

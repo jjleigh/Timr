@@ -47,7 +47,7 @@ class Timr extends React.Component {
   render () {
     return (
       <div id="timr-container">      
-        <ProgressBar />
+        <ProgressBar second={ this.state.second } />
         <Clock second={ this.state.second } 
                minute={ this.state.minute } 
                paused={ this.state.paused } 
