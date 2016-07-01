@@ -1,12 +1,15 @@
+@import '../style_variables.less';
+
 .clock-outer-container {
   position: absolute;
   top: 4%;
   left: 38%;
   z-index: 10;
-  background-color: #ffeca2;
+  background-color: @stopr_main_color;
   border-radius: 50%;
   width: 300px;
   height: 300px;
+
 
   #clock-inner-container {
     position: relative;
@@ -22,7 +25,7 @@
         font-size: 90px;
         display: inline-block;
         color: white;
-        font-family: Muli;
+        font-family: @main_font;
       }
     }
 
@@ -37,7 +40,7 @@
       top: 135px;
       left: 46%;
       font-size: 25px !important;
-      color: #FFA86E;
+      color: @stopr_icons;
     }
 
   }
