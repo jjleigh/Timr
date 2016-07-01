@@ -10,7 +10,7 @@ const PATH = (p) => path.resolve(__dirname, p || '');
 const COMMON = {
 	context: PATH('app'),
 	entry: {
-		app: ['babel-polyfill', './timr.js']
+		app: ['babel-polyfill', './timr.js', './stopr.js']
 	},
 	output: {
 		filename: 'bundle.js',

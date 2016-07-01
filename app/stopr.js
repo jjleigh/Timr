@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Stopr from './components/stopr.jsx';
+import Stopr from './components/stopr/stopr.jsx';
 
 var less = require('less');
 
