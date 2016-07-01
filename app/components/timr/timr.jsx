@@ -16,7 +16,32 @@ class Timr extends React.Component {
     }
   }
 
-  
+  decrementMinute() {
+    if( this.state.paused == false && this.state.second == 59 ) {
+      this.setState({minute: this.state.minute - 1 });
+    }   
+  }
+
+  decrementSecond() {
+    if (this.state.paused == false) {
+      if(this.state.second > 0) {
+        this.setState({second: this.state.second - 1 });
+      } else {
+        this.setState({second: 59 });
+        this.decrementMinute()
+      }
+    } 
+  }
+
+  changePauseState() {
+    if( this.state.paused == true ) {
+      this.setState({ paused: false });
+      let id = setInterval( () => { this.decrementSecond() }, 1000);
+      this.setState({intervalId: id });
+    } else {
+      this.setState({ paused: true });
+    }
+  }
 
   render () {
     return (
