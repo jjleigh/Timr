@@ -1,9 +1,7 @@
 import { expect, sinon, React, shallow, mount } from './helpers/spec-helper.js';
-
 import Stopr from '../app/components/stopr/stopr.jsx';
 
-describe('<Stopr />', function () {
-  
+describe('<Stopr />', function () { 
   describe('changePauseState', function(){
     describe('when pause is true', function(){
       it('should set the pause state to false', function(){
@@ -42,7 +40,7 @@ describe('<Stopr />', function () {
     });
 
     describe('when paused state is false', function() {
-      describe('when second state is less than 59 or less', function(){
+      describe('when second state is less than 59', function(){
         it('should not change the minute state by one', function () {
           const wrapper = mount(<Stopr minute={ 1 } second={ 30 } />);
           wrapper.instance().changePauseState();
@@ -82,14 +80,14 @@ describe('<Stopr />', function () {
       });
 
       describe('when the second is 59', function(){
-        it('should reset to 0', function () {
+        it('should reset to 0 and trigger the incrementMinute function', function () {
           const wrapper = mount(<Stopr minute={ 1 } second={ 59 }/>);
           wrapper.instance().changePauseState();
           wrapper.instance().incrementSecond();
           expect(wrapper.instance().state.second).to.eq(0);
+          expect(wrapper.instance().state.minute).to.eq(2);
         });
       });
-    });
-    
+    });   
   });
 });
