@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Clock from './clock.jsx'
 import ProgressBar from './progress_bar.jsx'
 
-class Timr extends React.Component {
+class Stopr extends React.Component {
 
   constructor(props) {
     super(props)
@@ -46,7 +46,7 @@ class Timr extends React.Component {
 
   render () {
     return (
-      <div id="timr-container">      
+      <div id="stopr-container">      
         <ProgressBar second={ this.state.second } />
         <Clock second={ this.state.second } 
                minute={ this.state.minute } 
@@ -57,4 +57,4 @@ class Timr extends React.Component {
   }
 }
 
-export default Timr;
+export default Stopr;
