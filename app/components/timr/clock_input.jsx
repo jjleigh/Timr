@@ -7,39 +7,47 @@ class ClockInput extends React.Component {
     super(props)
 
     this.state = {
-      minute: 0, 
-      second: 0,
-      paused: props.paused,
-      typing: props.typing
+      minute: '', 
+      second: '',
+      paused: props.paused
     }
   }
 
-  handleChange(event,field) {
-
+  handleChange(event, field) {
     if ( this.props.paused == true ){
-      let ref = this.refs[field]
-      this.setState({[field]: event.target.value })
+      this.filterChange(event, field);
     }
+  }
+
+  filterChange(event, field) {
+    let change = parseInt(event.target.value);
+    let type = typeof(parseInt(event.target.value));
+    
+    if( isNaN(change) != true && type == "number" ) {
+      let ref = this.refs[field];
+      this.setState({[field]: event.target.value });
+    } 
   }
 
   render() {
     return(
-      <div className="clock-input-container">
+      <div className={ `${ this.props.visible == true ? '': 'hidden ' }clock-input-container` }>
         <input className="clock-input minute" 
-               onKeyUp={ () => this.props.callback(this.state.minute, this.state.second)} 
+               onKeyUp={ (e) => this.props.updateCallback(e)} 
                type="minute"
                name="minute"
                ref="minute"
-               value={ this.state.minute.toString().length == 1 ? "0" + this.state.minute : this.state.minute }
+               value={ this.state.minute }
                onChange={ (e) => this.handleChange(e,'minute') }
         />
+        <span id="separator">:</span>
         <input className="clock-input second" 
-               onKeyUp={ () => this.props.callback(this.state.minute, this.state.second)} 
+               onKeyUp={ (e) => this.props.updateCallback(e)} 
                type="second"
                name="second"
                ref="second"
-               value={ this.state.second.toString().length == 1 ? "0" + this.state.second : this.state.second }
-               onChange={ (e) => this.handleChange(e,'second') }
+               value={ this.state.second }
+               onChange={ (e) => this.handleChange(e, 'second') }
         />
       </div>
     )  

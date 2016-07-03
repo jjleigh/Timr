@@ -18,6 +18,11 @@ class Timr extends React.Component {
     }
   }
 
+  propTypes: {
+    minute: React.PropTypes.object.number,
+    second: React.PropTypes.object.number,
+  } 
+
   decrementMinute() {
     if( this.state.paused == false && this.state.second == 59 ) {
       this.setState({minute: this.state.minute - 1 });
@@ -45,9 +50,11 @@ class Timr extends React.Component {
     }
   }
 
-  updateTime(min, sec) {
+  updateTime(e) {
     if ( this.state.paused == true ) {
-      this.setState({minute: min, second: sec});
+      let name = e.target.name;
+      let value = parseInt(e.target.value);
+      this.setState({[name]: value});
     }
   }
 
@@ -63,10 +70,11 @@ class Timr extends React.Component {
         <ProgressBar second={ this.state.second } />
         <Clock second={ this.state.second } 
                minute={ this.state.minute } 
-               paused={ this.state.paused } 
+               paused={ this.state.paused }
+               hidden={ this.state.typing }
                typingCallback={ () => this.changeTypingState() }
                pauseCallback={ () => this.changePauseState() }/> 
-        <ClockInput callback={ () => this.updateTime(minute, second) } 
+        <ClockInput updateCallback={ (e) => this.updateTime(e) } 
                     paused={ this.state.paused } 
                     visible={ this.state.typing } />       
       </div>

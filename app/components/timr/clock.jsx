@@ -7,7 +7,7 @@ class Clock extends React.Component {
     return(
       <div className="clock-outer-container">
         <div id="clock-inner-container">
-          <div className="inner">
+          <div className={ `${ this.props.hidden == true ? 'hidden ': '' }inner` }>
             <span className="min-container common" onClick={ this.props.typingCallback }>
               { this.props.minute.toString().length == 1 ? "0" + this.props.minute : this.props.minute }
             </span>

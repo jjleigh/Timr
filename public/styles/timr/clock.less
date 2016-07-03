@@ -20,6 +20,10 @@
       display: table-cell;
       vertical-align: middle;
 
+      &.hidden {
+        visibility: hidden;
+      }
+
       .common {
         font-size: 85px;
         display: inline-block;
@@ -50,28 +54,29 @@
   display: table;
   vertical-align: middle;
   position: absolute;
-  top: 26%;
+  top: 30%;
   left: 41%;
   z-index: 15;
 
+  &.hidden {
+    visibility: hidden;
+  }
+
+  #separator {
+    color: white;
+    font-family: @main_font;
+    font-size:  85px;
+    width: 20px !important;
+  }
 
   .clock-input {
-    height: 90px;
+    height: 85px;
     width: 100px;
-    background-color: blue;
+    background-color: @timr_main_color;
     font-size: 85px;
     color: white;
     border: none;
     outline: none;
-
-
-    &.minute {
-      margin-right: 10px;
-    }
-
-    &.second {
-      margin-left: 10px;
-    }
   }
 }
 
