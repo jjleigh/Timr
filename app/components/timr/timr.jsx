@@ -41,7 +41,7 @@ class Timr extends React.Component {
   }
 
   changePauseState() {
-    if( this.state.paused == true ) {
+    if( this.state.paused == true && this.timeGreaterThanZero() ) {
       this.setState({ paused: false , typing: false });
       let id = setInterval( () => { this.decrementSecond() }, 1000);
       this.setState({intervalId: id });
@@ -62,6 +62,10 @@ class Timr extends React.Component {
     if ( this.state.paused == true ) {
       this.setState({typing: true});
     }
+  }
+
+  timeGreaterThanZero() {
+    return( this.state.second > 0 || this.state.minute > 0)
   }
 
   render () {

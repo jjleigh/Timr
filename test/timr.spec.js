@@ -6,10 +6,21 @@ describe('<Timr />', function () {
   
   describe('changePauseState', function(){
     describe('when pause is true', function(){
-      it('should set the pause state to false', function(){
-        let wrapper = mount(<Timr second={ 2 } minute={ 0 }/>);
-        wrapper.instance().changePauseState();
-        expect(wrapper.instance().state.paused).to.eq(false);
+      describe.only('when minute and second states are at 0', function(){
+        it('should not set the pause state to false', function(){
+          let wrapper = mount(<Timr second={ 0 } minute={ 0 }/>);
+          wrapper.instance().changePauseState();
+          expect(wrapper.instance().state.paused).to.eq(true);
+        });
+      });
+
+
+      describe('when minute and second states are greater than 0', function(){
+        it('should set the pause state to false', function(){
+          let wrapper = mount(<Timr second={ 2 } minute={ 0 }/>);
+          wrapper.instance().changePauseState();
+          expect(wrapper.instance().state.paused).to.eq(false);
+        });
       });
     });
 
