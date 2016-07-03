@@ -65,7 +65,7 @@ class Timr extends React.Component {
                minute={ this.state.minute } 
                paused={ this.state.paused } 
                typingCallback={ () => this.changeTypingState() }
-               callback={ () => this.changePauseState() }/> 
+               pauseCallback={ () => this.changePauseState() }/> 
         <ClockInput callback={ () => this.updateTime(minute, second) } 
                     paused={ this.state.paused } 
                     visible={ this.state.typing } />       

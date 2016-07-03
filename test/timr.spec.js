@@ -30,7 +30,7 @@ describe('<Timr />', function () {
         clock.restore();
       });
 
-      it.only('should change the typing state to false', function(){
+      it('should change the typing state to false', function(){
         const wrapper = mount(<Timr second={ 2 } minute={ 0 }/>);
         wrapper.instance().changeTypingState();
         wrapper.instance().changePauseState();

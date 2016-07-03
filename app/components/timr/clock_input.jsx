@@ -9,7 +9,8 @@ class ClockInput extends React.Component {
     this.state = {
       minute: 0, 
       second: 0,
-      paused: props.paused
+      paused: props.paused,
+      typing: props.typing
     }
   }
 
@@ -46,10 +47,3 @@ class ClockInput extends React.Component {
 }
 
 export default ClockInput;
-
-// <input className="clock-input second" 
-//                onSubmit={ () => this.props.callback(this.state.min, this.state.sec)} 
-//                name="second"
-//                value={ this.state.value }
-//                onChange={ () => this.handleChange('sec') }
-//            />
