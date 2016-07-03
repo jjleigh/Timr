@@ -92,4 +92,35 @@ describe('<Timr />', function () {
       });
     });
   });
+
+  describe('updateTime', function() {
+    describe('when paused state is true', function(){
+      it('should update the minute and second state', function(){
+        const wrapper = mount(<Timr minute={0} second={0}/>);
+        wrapper.instance().updateTime(1, 20);
+        expect(wrapper.instance().state.minute).to.eq(1);
+        expect(wrapper.instance().state.second).to.eq(20);
+      });
+    });
+
+    describe('when paused state is false', function(){
+      it('should update the minute and second state', function(){
+        const wrapper = mount(<Timr minute={0} second={0}/>);
+        wrapper.instance().changePauseState();
+        wrapper.instance().updateTime(1, 20);
+        expect(wrapper.instance().state.minute).to.eq(0);
+        expect(wrapper.instance().state.second).to.eq(0);
+      });
+    });
+  });
 });
+
+
+
+
+
+
+
+
+
+
