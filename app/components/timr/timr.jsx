@@ -13,7 +13,8 @@ class Timr extends React.Component {
       paused: true,
       minute: props.minute,
       second: props.second,
-      intervalId: 0
+      intervalId: 0,
+      typing: false
     }
   }
 
@@ -36,7 +37,7 @@ class Timr extends React.Component {
 
   changePauseState() {
     if( this.state.paused == true ) {
-      this.setState({ paused: false });
+      this.setState({ paused: false , typing: false });
       let id = setInterval( () => { this.decrementSecond() }, 1000);
       this.setState({intervalId: id });
     } else {
@@ -50,6 +51,12 @@ class Timr extends React.Component {
     }
   }
 
+  changeTypingState() {
+    if ( this.state.paused == true ) {
+      this.setState({typing: true});
+    }
+  }
+
   render () {
     return (
       <div id="timr-container">      
@@ -57,9 +64,11 @@ class Timr extends React.Component {
         <Clock second={ this.state.second } 
                minute={ this.state.minute } 
                paused={ this.state.paused } 
-               callback={ () => this.changePauseState() }/>
+               typingCallback={ () => this.changeTypingState() }
+               callback={ () => this.changePauseState() }/> 
         <ClockInput callback={ () => this.updateTime(minute, second) } 
-                    paused={ this.state.paused } />       
+                    paused={ this.state.paused } 
+                    visible={ this.state.typing } />       
       </div>
     )
   }

@@ -29,6 +29,13 @@ describe('<Timr />', function () {
         expect(wrapper.instance().state.second).to.eq(19);
         clock.restore();
       });
+
+      it.only('should change the typing state to false', function(){
+        const wrapper = mount(<Timr second={ 2 } minute={ 0 }/>);
+        wrapper.instance().changeTypingState();
+        wrapper.instance().changePauseState();
+        expect(wrapper.instance().state.typing).to.eq(false);
+      });
     });
   });
 
@@ -110,6 +117,25 @@ describe('<Timr />', function () {
         wrapper.instance().updateTime(1, 20);
         expect(wrapper.instance().state.minute).to.eq(0);
         expect(wrapper.instance().state.second).to.eq(0);
+      });
+    });
+  });
+
+  describe('changeTypingState', function() {
+    describe('when paused state is true', function(){
+      it('should change the typing state', function(){
+        const wrapper = mount(<Timr minute={0} second={0}/>);
+        wrapper.instance().changeTypingState();
+        expect(wrapper.instance().state.typing).to.eq(true);
+      });
+    });
+
+    describe('when paused state is false', function(){
+      it('should not change the typing state', function(){
+        const wrapper = mount(<Timr minute={0} second={0}/>);
+        wrapper.instance().changePauseState();
+        wrapper.instance().changeTypingState();
+        expect(wrapper.instance().state.typing).to.eq(false);
       });
     });
   });

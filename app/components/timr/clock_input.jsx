@@ -29,7 +29,7 @@ class ClockInput extends React.Component {
                type="minute"
                name="minute"
                ref="minute"
-               value={ this.state.minute }
+               value={ this.state.minute.toString().length == 1 ? "0" + this.state.minute : this.state.minute }
                onChange={ (e) => this.handleChange(e,'minute') }
         />
         <input className="clock-input second" 
@@ -37,7 +37,7 @@ class ClockInput extends React.Component {
                type="second"
                name="second"
                ref="second"
-               value={ this.state.second }
+               value={ this.state.second.toString().length == 1 ? "0" + this.state.second : this.state.second }
                onChange={ (e) => this.handleChange(e,'second') }
         />
       </div>
