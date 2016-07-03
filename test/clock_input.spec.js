@@ -2,11 +2,11 @@ import { expect, sinon, React, shallow, mount } from './helpers/spec-helper.js';
 import ClockInput from '../app/components/timr/clock_input.jsx';
 
 describe('<ClockInput />', function(){
-    describe('onSubmit', function(){
+    describe('onKeyUp', function(){
         it('should trigger its callback function', function(){
             var update_time_callback = sinon.spy(); 
             const wrapper = mount(<ClockInput callback={ update_time_callback } paused={ true } />);
-            wrapper.find('input').first().simulate('submit');
+            wrapper.find('input').first().simulate('keyup');
             expect(update_time_callback).calledOnce;
         });
     });

@@ -25,7 +25,7 @@ class ClockInput extends React.Component {
     return(
       <div className="clock-input-container">
         <input className="clock-input minute" 
-               onSubmit={ () => this.props.callback(this.state.minute, this.state.second)} 
+               onKeyUp={ () => this.props.callback(this.state.minute, this.state.second)} 
                type="minute"
                name="minute"
                ref="minute"
@@ -33,7 +33,7 @@ class ClockInput extends React.Component {
                onChange={ (e) => this.handleChange(e,'minute') }
         />
         <input className="clock-input second" 
-               onSubmit={ () => this.props.callback(this.state.minute, this.state.second)} 
+               onKeyUp={ () => this.props.callback(this.state.minute, this.state.second)} 
                type="second"
                name="second"
                ref="second"
