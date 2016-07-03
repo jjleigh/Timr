@@ -39,8 +39,8 @@
   }
   
   @i: 0;
-  @increment: 180deg / 60;
-  .loop (@i) when (@i <= 60) {
+  @increment: 180deg / 59;
+  .loop (@i) when (@i <= 59) {
     &[data-progress="@{i}"] {
       .progress-circle {
         .progress-cover.cover, .progress-fill-layer {
