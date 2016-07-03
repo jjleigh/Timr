@@ -24,11 +24,12 @@
   
     .progress-cover, .progress-fill-layer {
       -webkit-backface-visibility: hidden;
-      transition: -webkit-transform @transition-length;
-      transition: -ms-transform @transition-length;
-      transition: transform @transition-length;
+      transition: -webkit-transform @transition-length linear;
+      transition: -ms-transform @transition-length linear;
+      transition: transform @transition-length linear;
       border-radius: 50%;
     }
+
     .progress-cover {
       clip: rect(0px, @circle-size, @circle-size, @circle-size / 2);
       .progress-fill-layer {
@@ -58,6 +59,19 @@
     .loop(@i + 1);
   }
   .loop(@i);
+}
+
+
+.progress-bar {
+  &[data-progress="0"] {
+    .progress-cover, .progress-fill-layer {
+      -webkit-backface-visibility: hidden;
+      transition: -webkit-transform 0ms;
+      transition: -ms-transform 0ms;
+      transition: transform 0ms;
+      border-radius: 50%;
+    }
+  }
 }
 
 
