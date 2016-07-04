@@ -42,11 +42,23 @@ describe('<ClockInput />', function(){
         });
 
         describe('when input value is not a number', function(){
-            it('should not update the minute or second state', function(){
-                const wrapper = mount(<ClockInput updateCallback="bob" paused={ false }/>);
-                var changeEvent = {target: {value: 'steve'}}
-                wrapper.instance().filterChange(changeEvent, 'minute');
-                expect(wrapper.instance().state.minute).to.not.eq('steve');
+            describe('and it is an empty string', function(){
+                 it('should update the minute or second state', function(){
+                    const wrapper = mount(<ClockInput updateCallback="bob" paused={ false }/>);
+                    wrapper.instance().setState({minute: 10});
+                    var changeEvent = {target: {value: ''}}
+                    wrapper.instance().filterChange(changeEvent, 'minute');
+                    expect(wrapper.instance().state.minute).to.eq(1);
+                });
+            });
+
+            describe('and it is not an empty string', function(){
+                it('should not update the minute or second state', function(){
+                    const wrapper = mount(<ClockInput updateCallback="bob" paused={ false }/>);
+                    var changeEvent = {target: {value: 'steve'}}
+                    wrapper.instance().filterChange(changeEvent, 'minute');
+                    expect(wrapper.instance().state.minute).to.not.eq('steve');
+                });
             });
         });
     });

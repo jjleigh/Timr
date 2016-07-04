@@ -6,7 +6,7 @@ describe('<Timr />', function () {
   
   describe('changePauseState', function(){
     describe('when pause is true', function(){
-      describe.only('when minute and second states are at 0', function(){
+      describe('when minute and second states are at 0', function(){
         it('should not set the pause state to false', function(){
           let wrapper = mount(<Timr second={ 0 } minute={ 0 }/>);
           wrapper.instance().changePauseState();
@@ -124,11 +124,11 @@ describe('<Timr />', function () {
 
     describe('when paused state is false', function(){
       it('should not update the minute and second state', function(){
-        const wrapper = mount(<Timr minute={0} second={0}/>);
+        const wrapper = mount(<Timr minute={2} second={0}/>);
         wrapper.instance().changePauseState();
         var eventObj = {target: {name: 'minute', value: 20}};
         wrapper.instance().updateTime(eventObj);
-        expect(wrapper.instance().state.minute).to.eq(0);
+        expect(wrapper.instance().state.minute).to.eq(2);
         expect(wrapper.instance().state.second).to.eq(0);
       });
     });
@@ -145,7 +145,7 @@ describe('<Timr />', function () {
 
     describe('when paused state is false', function(){
       it('should not change the typing state', function(){
-        const wrapper = mount(<Timr minute={0} second={0}/>);
+        const wrapper = mount(<Timr minute={2} second={0}/>);
         wrapper.instance().changePauseState();
         wrapper.instance().changeTypingState();
         expect(wrapper.instance().state.typing).to.eq(false);

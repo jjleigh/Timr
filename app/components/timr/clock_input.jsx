@@ -14,19 +14,30 @@ class ClockInput extends React.Component {
   }
 
   handleChange(event, field) {
-    if ( this.props.paused == true ){
+    if ( this.props.paused == true ){  
       this.filterChange(event, field);
     }
   }
 
   filterChange(event, field) {
-    let change = parseInt(event.target.value);
-    let type = typeof(parseInt(event.target.value));
-    
-    if( isNaN(change) != true && type == "number" ) {
+    let value = event.target.value
+    let change = parseInt(value);
+    let type = typeof(change); 
+    if( this.shouldUpdate(change, type, value)) {
       let ref = this.refs[field];
-      this.setState({[field]: event.target.value });
+      if (value == "") {
+        let currentValue = this.state[field].toString();
+        let newValue = parseInt(currentValue.slice(0, -1));
+        this.setState({[field]: newValue });
+      } else {
+        this.setState({[field]: value });
+      }
     } 
+  }
+
+  shouldUpdate(change, type, value) {
+    var regex = /\d/
+    return((isNaN(change) == true && value.length == 0 ) || (type == "number" && isNaN(change) != true));
   }
 
   render() {
