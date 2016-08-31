@@ -14,7 +14,7 @@ class ClockInput extends React.Component {
   }
 
   handleChange(event, field) {
-    if ( this.props.paused == true ){  
+    if(this.props.paused == true ){  
       this.filterChange(event, field);
     }
   }
@@ -23,21 +23,43 @@ class ClockInput extends React.Component {
     let value = event.target.value
     let change = parseInt(value);
     let type = typeof(change); 
-    if( this.shouldUpdate(change, type, value)) {
-      let ref = this.refs[field];
-      if (value == "") {
-        let currentValue = this.state[field].toString();
-        let newValue = parseInt(currentValue.slice(0, -1));
-        this.setState({[field]: newValue });
-      } else {
-        this.setState({[field]: value });
-      }
-    } 
+    console.log(this.shouldUpdate(change, type, value))
+    this.shouldUpdate(change, type, value) ? this.updateField(field, value) : this.resetField(field)
   }
 
-  shouldUpdate(change, type, value) {
-    var regex = /\d/
-    return((isNaN(change) == true && value.length == 0 ) || (type == "number" && isNaN(change) != true));
+  updateField(field, value) {
+    let ref = this.refs[field];
+    if (value == "") {
+      let currentValue = this.state[field].toString();
+      let newValue = parseInt(currentValue.slice(0, -1));
+      this.setState({[field]: newValue });
+    } else {
+      this.setState({[field]: value });
+    }
+  }
+
+  resetField(field) {
+    field == 'minute' ? this.setState({[field]: 99 }) : this.setState({[field]: 60 })
+  }
+
+  shouldUpdate(change, type, value, field) {
+    return this.emptyOrNum(change, value, type, field);
+  }
+
+  numWithinValidRange(field, change){
+    return field == 'minute' ? change <= 99 : change <= 60 
+  }
+
+  emptyOrNum(change, value, type, field) {
+    return this.emptyValue(change, value) || this.isValidNumber(type, change, field)
+  }
+
+  emptyValue(change, value) {
+    return isNaN(change) == true && value.length == 0 
+  }
+
+  isValidNumber(type, change, field) {
+    return type == "number" && isNaN(change) != true && this.numWithinValidRange(field, change)
   }
 
   render() {

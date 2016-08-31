@@ -39,6 +39,20 @@ describe('<ClockInput />', function(){
                 wrapper.instance().filterChange(changeEvent, 'minute');
                 expect(wrapper.instance().state.minute).to.eq(5);
             });
+
+            it('should not allow input values greater than 99 for minutes', function() {
+                const wrapper = mount(<ClockInput updateCallback="bob" paused={ false } />);
+                var changeEvent = {target: {value: 100}}
+                wrapper.instance().filterChange(changeEvent, 'minute');
+                expect(wrapper.instance().state.minute).to.eq(99);
+            });
+
+            it('should not allow input values greater than 60 for seconds', function() {
+                const wrapper = mount(<ClockInput updateCallback="bob" paused={ false } />);
+                var changeEvent = {target: {value: 61}}
+                wrapper.instance().filterChange(changeEvent, 'second');
+                expect(wrapper.instance().state.second).to.eq(60);
+            });
         });
 
         describe('when input value is not a number', function(){
