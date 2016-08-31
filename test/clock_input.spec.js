@@ -53,6 +53,14 @@ describe('<ClockInput />', function(){
                 wrapper.instance().filterChange(changeEvent, 'second');
                 expect(wrapper.instance().state.second).to.eq(60);
             });
+
+            it('should not allow input to show NaN when backspacing from a num value to empty value', function(){
+                const wrapper = mount(<ClockInput updateCallback="bob" paused={ false } />);
+                wrapper.instance().setState({second: 1});
+                var changeEvent = {target: {value: ''}}
+                wrapper.instance().filterChange(changeEvent, 'second');
+                expect(wrapper.instance().state.second).to.eq('');
+            });
         });
 
         describe('when input value is not a number', function(){

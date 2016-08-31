@@ -28,14 +28,19 @@ class ClockInput extends React.Component {
 
   updateField(field, value) {
     let ref = this.refs[field];
-    
-    if (value == "" && this.state[field] != "") {
+
+    if (this.shouldBackspace(value, field)) {
       let currentValue = this.state[field].toString();
       let newValue = parseInt(currentValue.slice(0, -1));
       this.setState({[field]: newValue });
+
     } else {
       this.setState({[field]: value });
     }
+  }
+
+  shouldBackspace(value, field) {
+    return value == "" && this.state[field] != "" && this.state[field].toString().length > 1
   }
 
   resetField(field) {
