@@ -23,13 +23,13 @@ class ClockInput extends React.Component {
     let value = event.target.value
     let change = parseInt(value);
     let type = typeof(change); 
-    console.log(this.shouldUpdate(change, type, value))
     this.shouldUpdate(change, type, value) ? this.updateField(field, value) : this.resetField(field)
   }
 
   updateField(field, value) {
     let ref = this.refs[field];
-    if (value == "") {
+    
+    if (value == "" && this.state[field] != "") {
       let currentValue = this.state[field].toString();
       let newValue = parseInt(currentValue.slice(0, -1));
       this.setState({[field]: newValue });

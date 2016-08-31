@@ -57,12 +57,20 @@ describe('<ClockInput />', function(){
 
         describe('when input value is not a number', function(){
             describe('and it is an empty string', function(){
-                 it('should update the minute or second state', function(){
+                it('should update the minute or second state', function(){
                     const wrapper = mount(<ClockInput updateCallback="bob" paused={ false }/>);
                     wrapper.instance().setState({minute: 10});
                     var changeEvent = {target: {value: ''}}
                     wrapper.instance().filterChange(changeEvent, 'minute');
                     expect(wrapper.instance().state.minute).to.eq(1);
+                });
+
+                it('should not update an empty input', function () {
+                    const wrapper = mount(<ClockInput updateCallback="bob" paused={ false }/>);
+                    wrapper.instance().setState({minute: ''});
+                    var changeEvent = {target: {value: ''}}
+                    wrapper.instance().filterChange(changeEvent, 'minute');
+                    expect(wrapper.instance().state.minute).to.eq('');
                 });
             });
 
