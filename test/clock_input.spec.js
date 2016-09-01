@@ -44,7 +44,7 @@ describe('<ClockInput />', function(){
                 const wrapper = mount(<ClockInput updateCallback="bob" paused={ false } />);
                 var changeEvent = {target: {value: 100}}
                 wrapper.instance().filterChange(changeEvent, 'minute');
-                expect(wrapper.instance().state.minute).to.eq(99);
+                expect(wrapper.instance().state.minute).to.eq(60);
             });
 
             it('should not allow input values greater than 60 for seconds', function() {

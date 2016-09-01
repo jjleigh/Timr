@@ -14,16 +14,12 @@ class ClockInput extends React.Component {
   }
 
   handleChange(event, field) {
-    if(this.props.paused == true ){  
-      this.filterChange(event, field);
-    }
+    if(this.props.paused == true ) this.filterChange(event, field);
   }
 
   filterChange(event, field) {
-    let value = event.target.value
-    let change = parseInt(value);
-    let type = typeof(change); 
-    this.shouldUpdate(change, type, value) ? this.updateField(field, value) : this.resetField(field)
+    let value = event.target.value;
+    this.shouldUpdate(value) ? this.updateField(field, value) : this.resetField(field)
   }
 
   updateField(field, value) {
@@ -44,27 +40,22 @@ class ClockInput extends React.Component {
   }
 
   resetField(field) {
-    field == 'minute' ? this.setState({[field]: 99 }) : this.setState({[field]: 60 })
+    this.setState({[field]: 60 });
   }
 
-  shouldUpdate(change, type, value, field) {
-    return this.emptyOrNum(change, value, type, field);
+  shouldUpdate(value) {
+    return this.emptyValue(value) || this.isValidNumber(value)
   }
 
-  numWithinValidRange(field, change){
-    return field == 'minute' ? change <= 99 : change <= 60 
-  }
-
-  emptyOrNum(change, value, type, field) {
-    return this.emptyValue(change, value) || this.isValidNumber(type, change, field)
-  }
-
-  emptyValue(change, value) {
+  emptyValue(value) {
+    let change = parseInt(value);
     return isNaN(change) == true && value.length == 0 
   }
 
-  isValidNumber(type, change, field) {
-    return type == "number" && isNaN(change) != true && this.numWithinValidRange(field, change)
+  isValidNumber(value) {
+    let change = parseInt(value);
+    let type = typeof(change); 
+    return type == "number" && isNaN(change) != true && change <= 60 
   }
 
   render() {
