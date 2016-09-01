@@ -23,8 +23,6 @@ class ClockInput extends React.Component {
   }
 
   updateField(field, value) {
-    let ref = this.refs[field];
-
     if (this.shouldBackspace(value, field)) {
       let currentValue = this.state[field].toString();
       let newValue = parseInt(currentValue.slice(0, -1));
