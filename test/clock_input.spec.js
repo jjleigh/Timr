@@ -11,6 +11,26 @@ describe('<ClockInput />', function(){
         });
     });
 
+    describe('onBlur', function(){
+        describe('when input field is empty', function(){
+            it('should un focus the input field and reset to 00:00', function(){
+                const wrapper = mount(<ClockInput paused={ true } />);
+                wrapper.find('input').first().simulate('click');
+                wrapper.find('input').first().simulate('blur');
+                expect(wrapper.instance().state.minute).to.eq(0);
+            });
+        });
+
+        describe('when input field has a value', function(){
+            it('should un focus the input field and set it to the value of the input', function(){
+                const wrapper = mount(<ClockInput paused={ true } />);
+                 wrapper.find('input').last().simulate('change', {target: {value: 30}});
+                wrapper.find('input').last().simulate('blur');
+                expect(wrapper.instance().state.second).to.eq(30);
+            });
+        });     
+    });
+
     describe('handleChange', function(){
         describe('when paused state is true', function(){
             it('it should change the value of the input', function(){
